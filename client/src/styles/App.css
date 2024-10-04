@@ -1,0 +1,28 @@
+/* src/styles/App.css */
+
+body {
+  font-family: Arial, sans-serif;
+}
+
+.container {
+  padding-bottom: 60px; /* To prevent content from being hidden behind footer */
+}
+
+footer {
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+}
+
+/* src/styles.css or your CSS file */
+.sidebar {
+  position: sticky;
+  height: 100vh;
+  overflow-y: auto;
+  background-color: #f8f9fa; /* Light background for sidebar */
+}
+
+.container {
+  /* margin-left: 250px; Space for the sidebar */
+  padding: 20px; /* Space around the content */
+}

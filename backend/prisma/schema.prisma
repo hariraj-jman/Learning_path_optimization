@@ -1,0 +1,142 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id             Int              @id @default(autoincrement())
+  name           String
+  email          String           @unique
+  password       String
+  role           Role
+  createdAt      DateTime         @default(now())
+  updatedAt      DateTime         @updatedAt
+  assignments    Assignment[]
+  courseProgress CourseProgress[]
+  userSkills     UserSkill[]
+
+  @@map("users")
+}
+
+model Course {
+  id                  Int                  @id @default(autoincrement())
+  title               String               @unique
+  duration            Int
+  difficultyLevel     DifficultyLevel
+  createdAt           DateTime             @default(now())
+  updatedAt           DateTime             @updatedAt
+  assignments         Assignment[]
+  courseProgress      CourseProgress[]
+  learningPathCourses LearningPathCourse[]
+
+  @@map("courses")
+}
+
+model LearningPath {
+  id                  Int                  @id @default(autoincrement())
+  title               String               @unique
+  description         String?
+  createdAt           DateTime             @default(now())
+  updatedAt           DateTime             @updatedAt
+  assignments         Assignment[]
+  learningPathCourses LearningPathCourse[]
+
+  @@map("learning_paths")
+}
+
+model LearningPathCourse {
+  id             Int          @id @default(autoincrement())
+  learningPathId Int
+  courseId       Int
+  order          Int
+  course         Course       @relation(fields: [courseId], references: [id])
+  learningPath   LearningPath @relation(fields: [learningPathId], references: [id])
+
+  @@unique([learningPathId, courseId])
+  @@map("learning_path_courses")
+}
+
+model Assignment {
+  id             Int              @id @default(autoincrement())
+  userId         Int
+  courseId       Int?
+  learningPathId Int?
+  assignedAt     DateTime         @default(now())
+  course         Course?          @relation(fields: [courseId], references: [id])
+  learningPath   LearningPath?    @relation(fields: [learningPathId], references: [id])
+  user           User             @relation(fields: [userId], references: [id])
+  courseProgress CourseProgress[]
+
+  @@map("assignments")
+}
+
+model CourseProgress {
+  id                 Int              @id @default(autoincrement())
+  assignmentId       Int
+  userId             Int
+  courseId           Int
+  progress           Float
+  score              Float?
+  timeInvested       Int
+  completionStatus   CompletionStatus
+  certificateUrl     String?
+  quizScore          Float?
+  assignmentScore    Float?
+  participationCount Int?
+  timeSpentOnQuizzes Int?
+  updatedAt          DateTime         @updatedAt
+  assignment         Assignment       @relation(fields: [assignmentId], references: [id])
+  course             Course           @relation(fields: [courseId], references: [id])
+  user               User             @relation(fields: [userId], references: [id])
+
+  @@map("course_progress")
+}
+
+model Skill {
+  id          Int         @id @default(autoincrement())
+  name        String      @unique
+  description String?
+  userSkills  UserSkill[]
+
+  @@map("skills")
+}
+
+model UserSkill {
+  id               Int              @id @default(autoincrement())
+  userId           Int
+  skillId          Int
+  proficiencyLevel ProficiencyLevel
+  updatedAt        DateTime         @updatedAt
+  skill            Skill            @relation(fields: [skillId], references: [id])
+  user             User             @relation(fields: [userId], references: [id])
+
+  @@unique([userId, skillId])
+  @@map("user_skills")
+}
+
+enum Role {
+  ADMIN
+  EMPLOYEE
+}
+
+enum DifficultyLevel {
+  EASY
+  MEDIUM
+  HARD
+}
+
+enum CompletionStatus {
+  NOT_STARTED
+  IN_PROGRESS
+  COMPLETED
+}
+
+enum ProficiencyLevel {
+  BEGINNER
+  INTERMEDIATE
+  ADVANCED
+}
