@@ -1,12 +1,10 @@
-// src/components/Admin/EmployeeManagement.jsx
-
 import React, { useState, useEffect } from 'react';
 import { Form, Button, Table, Alert, Modal } from 'react-bootstrap';
 import api from '../../services/api';
 
 const EmployeeManagement = () => {
   const [employees, setEmployees] = useState([]);
-  const [form, setForm] = useState({ name: '', email: '', password: '' });
+  const [form, setForm] = useState({ name: '', email: '', password: '', role: 'EMPLOYEE' });
   const [editingId, setEditingId] = useState(null);
   const [error, setError] = useState('');
   const [showModal, setShowModal] = useState(false); // State for modal visibility
@@ -31,7 +29,7 @@ const EmployeeManagement = () => {
   const handleCreate = async (e) => {
     e.preventDefault();
     try {
-      await api.post('/users', { ...form, role: 'EMPLOYEE' });
+      await api.post('/users', { ...form });
       fetchEmployees();
       resetForm();
       setShowModal(false); // Close modal after creating
@@ -42,7 +40,7 @@ const EmployeeManagement = () => {
 
   const handleEdit = (employee) => {
     setEditingId(employee.id);
-    setForm({ name: employee.name, email: employee.email, password: '' }); // Reset password for editing
+    setForm({ name: employee.name, email: employee.email, password: '', role: employee.role }); // Reset password for editing
     setShowModal(true); // Open modal for editing
   };
 
@@ -70,7 +68,7 @@ const EmployeeManagement = () => {
   };
 
   const resetForm = () => {
-    setForm({ name: '', email: '', password: '' });
+    setForm({ name: '', email: '', password: '', role: 'EMPLOYEE' });
     setEditingId(null);
     setError('');
   };
@@ -115,18 +113,34 @@ const EmployeeManagement = () => {
                 required
               />
             </Form.Group>
+              
+            {/* Role selection field */}
+            <Form.Group controlId="employeeRole" className="mb-3">
+              <Form.Label>Role</Form.Label>
+              <Form.Control
+                as="select"
+                name="role"
+                value={form.role}
+                onChange={handleChange}
+                required
+              >
+                <option value="EMPLOYEE">Employee</option>
+                <option value="ADMIN">Admin</option>
+              </Form.Control>
+            </Form.Group>
 
             {/* Password field for editing */}
             <Form.Group controlId="employeePassword" className="mb-3">
               <Form.Label>Password</Form.Label>
               <Form.Control
                 type="password"
-                placeholder="Enter new password (leave blank if not changing)"
+                placeholder={editingId ? "Enter new password (leave blank if not changing)" : "Password"}
                 name="password"
                 value={form.password}
                 onChange={handleChange}
               />
             </Form.Group>
+
 
             <Button variant="primary" type="submit">
               {editingId ? 'Update' : 'Create'} Employee

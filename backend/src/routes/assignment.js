@@ -6,6 +6,7 @@ const {
   getAllAssignments,
   updateAssignment,
   deleteAssignment,
+  getAssignmentsByEmployee, // Import the new controller
 } = require("../controllers/assignmentsController");
 const {
   authMiddleware,
@@ -23,6 +24,13 @@ router.use(authMiddleware);
  * @access  Protected
  */
 router.get("/", getAllAssignments);
+
+/**
+ * @route   GET /api/assignments/employee/:employeeId
+ * @desc    Get assignments for a specific employee by employeeId
+ * @access  Protected
+ */
+router.get("/employee/:employeeId", getAssignmentsByEmployee);
 
 /**
  * @route   POST /api/assignments

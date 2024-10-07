@@ -42,7 +42,7 @@ const ProgressTracker = () => {
               <td>
                 <ProgressBar now={progress.progress} label={`${progress.progress}%`} />
               </td>
-              <td>{progress.score || 'N/A'}</td>
+              <td>{progress.score || 0}</td>
               <td>{progress.timeInvested}</td>
               <td>{progress.completionStatus}</td>
             </tr>

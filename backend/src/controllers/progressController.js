@@ -1,13 +1,20 @@
 // src/controllers/progressController.js
 
-const { PrismaClient } = require('@prisma/client');
+const { PrismaClient } = require("@prisma/client");
 const prisma = new PrismaClient();
 
 /**
  * Create a new CourseProgress (Admin only)
  */
 const createCourseProgress = async (req, res) => {
-  const { userId, courseId, assignmentId, progress } = req.body;
+  const {
+    userId,
+    courseId,
+    assignmentId,
+    progress,
+    timeInvested,
+    completionStatus,
+  } = req.body;
 
   try {
     const newProgress = await prisma.courseProgress.create({
@@ -16,13 +23,15 @@ const createCourseProgress = async (req, res) => {
         courseId: parseInt(courseId),
         assignmentId: parseInt(assignmentId),
         progress,
+        timeInvested,
+        completionStatus,
       },
     });
 
     res.status(201).json(newProgress);
   } catch (error) {
-    console.error('Error creating course progress:', error);
-    res.status(500).json({ error: 'Internal server error.' });
+    console.error("Error creating course progress:", error);
+    res.status(500).json({ error: "Internal server error." });
   }
 };
 
@@ -43,8 +52,8 @@ const getCourseProgressByUser = async (req, res) => {
 
     res.status(200).json(progressRecords);
   } catch (error) {
-    console.error('Error fetching course progress by user:', error);
-    res.status(500).json({ error: 'Internal server error.' });
+    console.error("Error fetching course progress by user:", error);
+    res.status(500).json({ error: "Internal server error." });
   }
 };
 
@@ -69,13 +78,16 @@ const getCourseProgressByAssignmentCourse = async (req, res) => {
     });
 
     if (!progressRecord) {
-      return res.status(404).json({ error: 'Course progress not found.' });
+      return res.status(404).json({ error: "Course progress not found." });
     }
 
     res.status(200).json(progressRecord);
   } catch (error) {
-    console.error('Error fetching course progress by assignment and course:', error);
-    res.status(500).json({ error: 'Internal server error.' });
+    console.error(
+      "Error fetching course progress by assignment and course:",
+      error
+    );
+    res.status(500).json({ error: "Internal server error." });
   }
 };
 
@@ -84,18 +96,38 @@ const getCourseProgressByAssignmentCourse = async (req, res) => {
  */
 const updateCourseProgress = async (req, res) => {
   const { id } = req.params;
-  const { progress } = req.body;
+  const {
+    progress,
+    score,
+    timeInvested,
+    completionStatus,
+    certificateUrl,
+    quizScore,
+    assignmentScore,
+    participationCount,
+    timeSpentOnQuizzes,
+  } = req.body;
 
   try {
     const updatedProgress = await prisma.courseProgress.update({
       where: { id: parseInt(id) },
-      data: { progress },
+      data: {
+        ...(progress !== undefined && { progress }), // Update progress if provided
+        ...(score !== undefined && { score }), // Update score if provided
+        ...(timeInvested !== undefined && { timeInvested }), // Update timeInvested if provided
+        ...(completionStatus !== undefined && { completionStatus }), // Update completionStatus if provided
+        ...(certificateUrl !== undefined && { certificateUrl }), // Update certificateUrl if provided
+        ...(quizScore !== undefined && { quizScore }), // Update quizScore if provided
+        ...(assignmentScore !== undefined && { assignmentScore }), // Update assignmentScore if provided
+        ...(participationCount !== undefined && { participationCount }), // Update participationCount if provided
+        ...(timeSpentOnQuizzes !== undefined && { timeSpentOnQuizzes }), // Update timeSpentOnQuizzes if provided
+      },
     });
 
     res.status(200).json(updatedProgress);
   } catch (error) {
-    console.error('Error updating course progress:', error);
-    res.status(500).json({ error: 'Internal server error.' });
+    console.error("Error updating course progress:", error);
+    res.status(500).json({ error: "Internal server error." });
   }
 };
 
@@ -114,8 +146,8 @@ const getAllCourseProgress = async (req, res) => {
 
     res.status(200).json(allProgress);
   } catch (error) {
-    console.error('Error fetching all course progress:', error);
-    res.status(500).json({ error: 'Internal server error.' });
+    console.error("Error fetching all course progress:", error);
+    res.status(500).json({ error: "Internal server error." });
   }
 };
 

@@ -14,7 +14,7 @@ router.use(authMiddleware);
 // POST /api/progress - Create a new CourseProgress (Admin only)
 router.post(
   "/",
-  authorizeRoles("ADMIN"),
+  authorizeRoles("ADMIN", "EMPLOYEE"),
   progressController.createCourseProgress
 );
 

@@ -20,7 +20,7 @@ export const assignLearningPathToEmployee = async (
   learningPathId
 ) => {
   try {
-    const response = await axios.post(`/admin/assign-learning-path`, {
+    const response = await axios.post(`/assignments`, {
       employeeId,
       learningPathId,
     });

@@ -11,6 +11,7 @@ import EmployeeDashboardPage from "./pages/Employee/EmployeeDashboard";
 import NotFound from "./pages/NotFound";
 import CourseForm from "./components/Admin/CourseForm";
 import LearningPathForm from "./components/Admin/LearningPathForm";
+import EmployeeAssignedCoursePage from "./pages/Employee/EmployeeAssignedCoursePage"; // Ensure this is correct
 import EmployeeManagement from "./components/Admin/EmployeeManagement";
 import AssignCoursePage from "./pages/Admin/AssignCoursePage"; // New Import
 import AssignLearningPathPage from "./pages/Admin/AssignLearningPathPage"; // New Import
@@ -84,6 +85,15 @@ const App = () => {
               element={
                 <PrivateRoute roles={["EMPLOYEE"]}>
                   <EmployeeDashboardPage />
+                </PrivateRoute>
+              }
+            />
+
+            <Route
+              path="/employee/assigned-courses"
+              element={
+                <PrivateRoute roles={["EMPLOYEE"]}>
+                  <EmployeeAssignedCoursePage />
                 </PrivateRoute>
               }
             />

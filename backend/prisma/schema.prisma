@@ -71,6 +71,8 @@ model Assignment {
   user           User             @relation(fields: [userId], references: [id])
   courseProgress CourseProgress[]
 
+  @@unique([userId, courseId]) // Ensures that userId and courseId combination is unique
+  @@unique([userId, learningPathId])
   @@map("assignments")
 }
 

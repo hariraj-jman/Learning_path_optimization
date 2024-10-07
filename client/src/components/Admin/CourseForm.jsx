@@ -45,7 +45,14 @@ const CourseForm = ({ onSuccess }) => {
         await api.post('/courses', { title, duration: Number(duration), difficultyLevel });
       }
       
-      onSuccess();
+      resetForm();
+    } catch (err) {
+      setError(err.response?.data?.error || 'Failed to save course.');
+    }
+  };
+
+  const resetForm = async () => {
+    onSuccess();
       setTitle('');
       setDuration('');
       setDifficultyLevel('EASY');
@@ -57,10 +64,7 @@ const CourseForm = ({ onSuccess }) => {
       const response = await api.get('/courses');
       setCourses(response.data);
       setOriginalCourses(response.data);
-    } catch (err) {
-      setError(err.response?.data?.error || 'Failed to save course.');
-    }
-  };
+  }
 
   const handleEdit = (course) => {
     setIsEditing(true);
@@ -86,12 +90,17 @@ const CourseForm = ({ onSuccess }) => {
     }
   };
 
+  const handleCreateNewCourse = () => {
+    resetForm();
+    setShowModal(true)
+  }
+
   return (
     <div>
       <Row className="align-items-center mb-3">
         <Col className="d-flex">
           <h2>Course Management</h2>
-          <Button variant="primary" className="ms-auto" onClick={() => setShowModal(true)}>
+          <Button variant="primary" className="ms-auto" onClick={() => handleCreateNewCourse()}>
             Create New Course
           </Button>
         </Col>
