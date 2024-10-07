@@ -22,7 +22,7 @@ const AssignedCourses = () => {
         title: assignment.course.title,
         progress: assignment.courseProgress.length > 0 ? assignment.courseProgress[0].progress : 'Not Started',
         completionStatus: assignment.courseProgress.length > 0 ? assignment.courseProgress[0].completionStatus : 'Not Completed',
-        certificateUrl: assignment.courseProgress.length > 0 ? assignment.courseProgress[0].certificateUrl : null ,
+        certificateUrl: assignment.courseProgress.length > 0 ? assignment.courseProgress[0].certificateUrl : null,
       }));
 
       setAssignedCourses(coursesWithProgress);

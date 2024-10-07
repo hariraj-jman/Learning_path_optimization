@@ -112,15 +112,23 @@ const updateCourseProgress = async (req, res) => {
     const updatedProgress = await prisma.courseProgress.update({
       where: { id: parseInt(id) },
       data: {
-        ...(progress !== undefined && { progress }), // Update progress if provided
-        ...(score !== undefined && { score }), // Update score if provided
-        ...(timeInvested !== undefined && { timeInvested }), // Update timeInvested if provided
+        ...(progress !== undefined && { progress: parseFloat(progress) }), // Update progress if provided
+        ...(score !== undefined && { score: parseFloat(score) }), // Update score if provided
+        ...(timeInvested !== undefined && {
+          timeInvested: Number(timeInvested),
+        }), // Update timeInvested if provided
         ...(completionStatus !== undefined && { completionStatus }), // Update completionStatus if provided
         ...(certificateUrl !== undefined && { certificateUrl }), // Update certificateUrl if provided
-        ...(quizScore !== undefined && { quizScore }), // Update quizScore if provided
-        ...(assignmentScore !== undefined && { assignmentScore }), // Update assignmentScore if provided
-        ...(participationCount !== undefined && { participationCount }), // Update participationCount if provided
-        ...(timeSpentOnQuizzes !== undefined && { timeSpentOnQuizzes }), // Update timeSpentOnQuizzes if provided
+        ...(quizScore !== undefined && { quizScore: Number(quizScore) }), // Update quizScore if provided
+        ...(assignmentScore !== undefined && {
+          assignmentScore: Number(assignmentScore),
+        }), // Update assignmentScore if provided
+        ...(participationCount !== undefined && {
+          participationCount: Number(participationCount),
+        }), // Update participationCount if provided
+        ...(timeSpentOnQuizzes !== undefined && {
+          timeSpentOnQuizzes: Number(timeSpentOnQuizzes),
+        }), // Update timeSpentOnQuizzes if provided
       },
     });
 
