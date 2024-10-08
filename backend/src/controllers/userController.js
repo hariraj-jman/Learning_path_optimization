@@ -1,7 +1,6 @@
 // src/controllers/userController.js
 
-
-const bcrypt = require('bcrypt');
+const bcrypt = require("bcrypt");
 const prisma = require("../../prismaClient");
 
 /**
@@ -22,13 +21,13 @@ const getCurrentUser = async (req, res) => {
     });
 
     if (!user) {
-      return res.status(404).json({ error: 'User not found.' });
+      return res.status(404).json({ error: "User not found." });
     }
 
     res.status(200).json(user);
   } catch (error) {
-    console.error('Error fetching current user:', error);
-    res.status(500).json({ error: 'Internal server error.' });
+    console.error("Error fetching current user:", error);
+    res.status(500).json({ error: "Internal server error." });
   }
 };
 
@@ -38,7 +37,7 @@ const getCurrentUser = async (req, res) => {
 const getAllEmployees = async (req, res) => {
   try {
     const employees = await prisma.user.findMany({
-      where: { role: 'EMPLOYEE' },
+      where: { role: "EMPLOYEE" },
       select: {
         id: true,
         name: true,
@@ -51,8 +50,8 @@ const getAllEmployees = async (req, res) => {
 
     res.status(200).json(employees);
   } catch (error) {
-    console.error('Error fetching employees:', error);
-    res.status(500).json({ error: 'Internal server error.' });
+    console.error("Error fetching employees:", error);
+    res.status(500).json({ error: "Internal server error." });
   }
 };
 
@@ -68,7 +67,9 @@ const createEmployee = async (req, res) => {
     });
 
     if (existingUser) {
-      return res.status(400).json({ error: 'User with this email already exists.' });
+      return res
+        .status(400)
+        .json({ error: "User with this email already exists." });
     }
 
     const hashedPassword = await bcrypt.hash(password, 10);
@@ -78,7 +79,7 @@ const createEmployee = async (req, res) => {
         name,
         email,
         password: hashedPassword,
-        role: 'EMPLOYEE',
+        role: "EMPLOYEE",
       },
     });
 
@@ -91,8 +92,8 @@ const createEmployee = async (req, res) => {
       updatedAt: newUser.updatedAt,
     });
   } catch (error) {
-    console.error('Error creating employee:', error);
-    res.status(500).json({ error: 'Internal server error.' });
+    console.error("Error creating employee:", error);
+    res.status(500).json({ error: "Internal server error." });
   }
 };
 
@@ -125,8 +126,8 @@ const updateEmployee = async (req, res) => {
 
     res.status(200).json(updatedUser);
   } catch (error) {
-    console.error('Error updating employee:', error);
-    res.status(500).json({ error: 'Internal server error.' });
+    console.error("Error updating employee:", error);
+    res.status(500).json({ error: "Internal server error." });
   }
 };
 
@@ -141,10 +142,10 @@ const deleteEmployee = async (req, res) => {
       where: { id: parseInt(id) },
     });
 
-    res.status(200).json({ message: 'Employee deleted successfully.' });
+    res.status(200).json({ message: "Employee deleted successfully." });
   } catch (error) {
-    console.error('Error deleting employee:', error);
-    res.status(500).json({ error: 'Internal server error.' });
+    console.error("Error deleting employee:", error);
+    res.status(500).json({ error: "Internal server error." });
   }
 };
 

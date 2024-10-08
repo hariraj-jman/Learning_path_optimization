@@ -13,7 +13,9 @@ const createCourse = async (req, res) => {
     });
 
     if (existingCourse) {
-      return res.status(400).json({ error: 'Course with this title already exists.' });
+      return res
+        .status(400)
+        .json({ error: "Course with this title already exists." });
     }
 
     // Create new course
@@ -27,8 +29,8 @@ const createCourse = async (req, res) => {
 
     res.status(201).json(newCourse);
   } catch (error) {
-    console.error('Error creating course:', error);
-    res.status(500).json({ error: 'Internal server error.' });
+    console.error("Error creating course:", error);
+    res.status(500).json({ error: "Internal server error." });
   }
 };
 
@@ -40,8 +42,8 @@ const getAllCourses = async (req, res) => {
     const courses = await prisma.course.findMany();
     res.status(200).json(courses);
   } catch (error) {
-    console.error('Error fetching courses:', error);
-    res.status(500).json({ error: 'Internal server error.' });
+    console.error("Error fetching courses:", error);
+    res.status(500).json({ error: "Internal server error." });
   }
 };
 
@@ -60,8 +62,8 @@ const updateCourse = async (req, res) => {
 
     res.status(200).json(updatedCourse);
   } catch (error) {
-    console.error('Error updating course:', error);
-    res.status(500).json({ error: 'Internal server error.' });
+    console.error("Error updating course:", error);
+    res.status(500).json({ error: "Internal server error." });
   }
 };
 
@@ -76,10 +78,10 @@ const deleteCourse = async (req, res) => {
       where: { id: parseInt(id) },
     });
 
-    res.status(200).json({ message: 'Course deleted successfully.' });
+    res.status(200).json({ message: "Course deleted successfully." });
   } catch (error) {
-    console.error('Error deleting course:', error);
-    res.status(500).json({ error: 'Internal server error.' });
+    console.error("Error deleting course:", error);
+    res.status(500).json({ error: "Internal server error." });
   }
 };
 
