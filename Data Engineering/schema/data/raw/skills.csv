@@ -1,0 +1,51 @@
+id,name,description
+1,JavaScript,Programming language
+2,React,Frontend library
+3,Node.js,Backend runtime
+4,CSS,Styling language
+5,SQL,Database language
+11,Python,General-purpose programming language
+12,Django,Python web framework for rapid development
+13,Flask,Lightweight Python web framework
+14,PostgreSQL,Advanced open-source relational database system
+15,MongoDB,NoSQL database for scalable applications
+16,Docker,Containerization platform for application deployment
+17,Kubernetes,System for automating container orchestration
+18,Git,Version control system for source code management
+19,AWS,Cloud computing platform by Amazon
+20,TypeScript,Typed superset of JavaScript
+21,GraphQL,Query language for APIs
+22,Java,"High-level, object-oriented programming language"
+23,C#,Object-oriented programming language developed by Microsoft
+24,Ruby on Rails,Full-stack web application framework for Ruby
+25,Vue.js,Progressive JavaScript framework for building user interfaces
+26,Angular,Web application framework for dynamic web apps
+27,Sass,CSS preprocessor for maintaining stylesheets
+28,Bootstrap,Frontend framework for responsive web design
+29,Jenkins,Automation server for continuous integration
+30,Terraform,Infrastructure as code tool for provisioning cloud resources
+31,Ansible,Automation tool for configuration management
+32,Elasticsearch,Search and analytics engine
+33,Redux,State management library for JavaScript applications
+34,Swift,Programming language for iOS and macOS development
+35,Go,Statically typed programming language by Google
+36,Scala,Programming language combining object-oriented and functional paradigms
+37,TDD,Test-Driven Development methodology for software testing
+38,Agile,Methodology for iterative software development
+39,Scrum,Framework for Agile project management
+40,Figma,Collaborative interface design tool
+41,JIRA,Project management tool for Agile development
+42,Webpack,JavaScript module bundler
+43,Babel,JavaScript compiler for ES6 and beyond
+44,Nginx,Web server and reverse proxy
+45,Apache,Popular open-source web server
+46,Linux,Open-source operating system kernel
+47,Azure,Cloud computing platform by Microsoft
+48,Pandas,Python library for data analysis
+49,NumPy,Python library for numerical computing
+50,Matplotlib,Python library for data visualization
+51,JUnit,Testing framework for Java applications
+52,Mocha,JavaScript test framework for Node.js
+53,Selenium,Automated testing framework for web applications
+54,Jest,JavaScript testing framework
+55,Express.js,Minimalist web framework for Node.js

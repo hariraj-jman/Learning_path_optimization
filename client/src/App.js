@@ -29,6 +29,14 @@ const App = () => {
 
             {/* Admin Routes */}
             <Route
+              path="/"
+              element={
+                <PrivateRoute roles={["ADMIN"]}>
+                  <AdminDashboardPage />
+                </PrivateRoute>
+              }
+            />
+            <Route
               path="/admin/dashboard"
               element={
                 <PrivateRoute roles={["ADMIN"]}>
@@ -80,6 +88,14 @@ const App = () => {
             />
 
             {/* Employee Routes */}
+            <Route
+              path="/"
+              element={
+                <PrivateRoute roles={["EMPLOYEE"]}>
+                  <EmployeeDashboardPage />
+                </PrivateRoute>
+              }
+            />
             <Route
               path="/employee/dashboard"
               element={

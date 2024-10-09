@@ -1,7 +1,7 @@
 // src/context/AuthContext.jsx
 
-import React, { createContext, useState, useEffect } from 'react';
-import api from '../services/api';
+import React, { createContext, useState, useEffect } from "react";
+import api from "../services/api";
 
 export const AuthContext = createContext();
 
@@ -10,19 +10,19 @@ export const AuthProvider = ({ children }) => {
   const [loading, setLoading] = useState(true);
 
   const login = async (email, password) => {
-    const data = await api.post('/auth/login', { email, password });
-    localStorage.setItem('token', data.data.token);
+    const data = await api.post("/auth/login", { email, password });
+    localStorage.setItem("token", data.data.token);
     setUser(data.data.user);
   };
 
   const logout = () => {
-    localStorage.removeItem('token');
+    localStorage.removeItem("token");
     setUser(null);
   };
 
   const fetchUser = async () => {
     try {
-      const response = await api.get('/users/me');
+      const response = await api.get("/users/me");
       setUser(response.data);
     } catch (err) {
       logout();
@@ -32,7 +32,7 @@ export const AuthProvider = ({ children }) => {
   };
 
   useEffect(() => {
-    if (localStorage.getItem('token')) {
+    if (localStorage.getItem("token")) {
       fetchUser();
     } else {
       setLoading(false);

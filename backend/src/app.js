@@ -11,6 +11,7 @@ const learningPathRoutes = require("./routes/learningPathRoutes"); // Importing 
 const assignmentRoutes = require("./routes/assignment");
 const progressRoutes = require("./routes/progressRoutes"); // Importing progressRoutes
 const errorMiddleware = require("./middlewares/errorMiddleware");
+const userSkillController = require("./routes/userSkillRoutes");
 
 const app = express();
 
@@ -31,7 +32,9 @@ app.use("/api/users", userRoutes);
 app.use("/api/assignments", assignmentRoutes);
 app.use("/api/courses", courseRoutes);
 app.use("/api/learning-paths", learningPathRoutes); // Using learningPathRoutes
-app.use("/api/progress", progressRoutes); // Using progressRoutes
+app.use("/api/progress", progressRoutes);
+app.use("/api/skills", userSkillController);
+// Using progressRoutes
 // Add more routes as needed
 
 // Error Handling Middleware

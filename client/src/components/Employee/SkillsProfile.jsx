@@ -1,31 +1,31 @@
 // src/components/Employee/SkillsProfile.jsx
 
-import React, { useState, useEffect } from 'react';
-import { Form, Button, Table, Alert } from 'react-bootstrap';
-import api from '../../services/api';
+import React, { useState, useEffect } from "react";
+import { Form, Button, Table, Alert } from "react-bootstrap";
+import api from "../../services/api";
 
 const SkillsProfile = () => {
   const [skills, setSkills] = useState([]);
   const [allSkills, setAllSkills] = useState([]);
-  const [selectedSkill, setSelectedSkill] = useState('');
-  const [proficiency, setProficiency] = useState('BEGINNER');
-  const [error, setError] = useState('');
+  const [selectedSkill, setSelectedSkill] = useState("");
+  const [proficiency, setProficiency] = useState("BEGINNER");
+  const [error, setError] = useState("");
 
   const fetchSkills = async () => {
     try {
-      const response = await api.get('/users/skills');
+      const response = await api.get("/skills");
       setSkills(response.data);
     } catch (err) {
-      setError('Failed to fetch skills.');
+      setError("Failed to fetch skills.");
     }
   };
 
   const fetchAllSkills = async () => {
     try {
-      const response = await api.get('/skills');
+      const response = await api.get("/skills");
       setAllSkills(response.data);
     } catch (err) {
-      setError('Failed to fetch all skills.');
+      setError("Failed to fetch all skills.");
     }
   };
 
@@ -38,16 +38,16 @@ const SkillsProfile = () => {
     e.preventDefault();
     if (!selectedSkill) return;
     try {
-      await api.post('/users/skills', {
+      await api.post("/api/skills", {
         skillId: Number(selectedSkill),
         proficiencyLevel: proficiency,
       });
       fetchSkills();
-      setSelectedSkill('');
-      setProficiency('BEGINNER');
-      setError('');
+      setSelectedSkill("");
+      setProficiency("BEGINNER");
+      setError("");
     } catch (err) {
-      setError(err.response?.data?.error || 'Failed to add skill.');
+      setError(err.response?.data?.error || "Failed to add skill.");
     }
   };
 
@@ -56,7 +56,7 @@ const SkillsProfile = () => {
       await api.delete(`/users/skills/${skillId}`);
       fetchSkills();
     } catch (err) {
-      setError(err.response?.data?.error || 'Failed to delete skill.');
+      setError(err.response?.data?.error || "Failed to delete skill.");
     }
   };
 
@@ -114,7 +114,11 @@ const SkillsProfile = () => {
               <td>{skill.skill.name}</td>
               <td>{skill.proficiencyLevel}</td>
               <td>
-                <Button variant="danger" size="sm" onClick={() => handleDeleteSkill(skill.id)}>
+                <Button
+                  variant="danger"
+                  size="sm"
+                  onClick={() => handleDeleteSkill(skill.id)}
+                >
                   Delete
                 </Button>
               </td>
