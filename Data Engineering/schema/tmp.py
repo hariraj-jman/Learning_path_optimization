@@ -25,7 +25,7 @@ def display_csv_info(folder_path):
 
 
 # Specify the folder path here
-folder_path = "./data/prep/"  # Change this to your folder path
+folder_path = "./data/raw/"  # Change this to your folder path
 
 # Call the function to display CSV info
 display_csv_info(folder_path)
