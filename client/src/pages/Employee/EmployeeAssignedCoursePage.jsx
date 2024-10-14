@@ -1,7 +1,16 @@
 // src/pages/Employee/EmployeeAssignedCoursePage.jsx
 
 import React, { useState, useEffect, useContext } from "react";
-import { Card, Col, Row, Alert, Button, Modal, Form } from "react-bootstrap";
+import {
+  Card,
+  Col,
+  Container,
+  Row,
+  Alert,
+  Button,
+  Modal,
+  Form,
+} from "react-bootstrap";
 import api from "../../services/api";
 import { AuthContext } from "../../context/AuthContext";
 
@@ -163,7 +172,9 @@ const EmployeeAssignedCoursePage = () => {
       <Row>
         {Object.keys(coursesByStatus).map((status) => (
           <Col md={12} key={status}>
-            <h3>{status.replace("_", " ")}</h3>
+            <Container className="bg-primary text-white py-2 rounded m-2">
+              <h4 className="m-0">{status.replace("_", " ")}</h4>
+            </Container>
             <Row>
               {coursesByStatus[status].map((assignment) => (
                 <Col md={4} key={assignment.course.id} className="mb-3">
@@ -200,14 +211,14 @@ const EmployeeAssignedCoursePage = () => {
                         )}
                         {status === "COMPLETED" && (
                           <>
-                            <Button
+                            {/* <Button
                               variant="warning"
                               onClick={() =>
                                 handleUpdateClick(assignment.courseProgress[0])
                               }
                             >
                               Update Course
-                            </Button>
+                            </Button> */}
                             {assignment.courseProgress[0].certificateUrl ? (
                               <Button
                                 variant="link"

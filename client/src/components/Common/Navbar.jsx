@@ -1,9 +1,9 @@
 // src/components/Common/Navbar.jsx
 
-import React, { useContext } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
-import { Navbar, Nav, Container, Button, NavDropdown } from 'react-bootstrap';
-import { AuthContext } from '../../context/AuthContext';
+import React, { useContext } from "react";
+import { Link, useNavigate } from "react-router-dom";
+import { Navbar, Nav, Container, Button, NavDropdown } from "react-bootstrap";
+import { AuthContext } from "../../context/AuthContext";
 
 const NavigationBar = () => {
   const { user, logout } = useContext(AuthContext);
@@ -11,7 +11,7 @@ const NavigationBar = () => {
 
   const handleLogout = () => {
     logout();
-    navigate('/login');
+    navigate("/login");
   };
 
   return (
@@ -22,10 +22,13 @@ const NavigationBar = () => {
         </Navbar.Brand>
         <Navbar.Toggle aria-controls="basic-navbar-nav" />
         <Navbar.Collapse id="basic-navbar-nav">
-          <Nav className="me-auto">
-            {user && user.role === 'ADMIN' && (
+          <Nav
+            className="me-auto"
+            style={{ position: "sticky", top: "0px", left: "0px" }}
+          >
+            {user && user.role === "ADMIN" && (
               <NavDropdown title="Admin" id="admin-nav-dropdown">
-                <NavDropdown.Item as={Link} to="/admin/dashboard">
+                {/* <NavDropdown.Item as={Link} to="/admin/dashboard">
                   Dashboard
                 </NavDropdown.Item>
                 <NavDropdown.Item as={Link} to="/admin/employee-management">
@@ -43,10 +46,10 @@ const NavigationBar = () => {
                 </NavDropdown.Item>
                 <NavDropdown.Item as={Link} to="/admin/assign-learning-path">
                   Assign Learning Path
-                </NavDropdown.Item>
+                </NavDropdown.Item> */}
               </NavDropdown>
             )}
-            {user && user.role === 'EMPLOYEE' && (
+            {user && user.role === "EMPLOYEE" && (
               <>
                 <Nav.Link as={Link} to="/employee/dashboard">
                   Dashboard
@@ -54,7 +57,7 @@ const NavigationBar = () => {
                 <Nav.Link as={Link} to="/employee/assigned-courses">
                   Assigned Courses
                 </Nav.Link>
-                <Nav.Link as={Link} to="/employee/progress-tracker">
+                {/* <Nav.Link as={Link} to="/employee/progress-tracker">
                   Progress Tracker
                 </Nav.Link>
                 <Nav.Link as={Link} to="/employee/skills-profile">
@@ -62,7 +65,7 @@ const NavigationBar = () => {
                 </Nav.Link>
                 <Nav.Link as={Link} to="/employee/suggested-learning">
                   Suggested Learning
-                </Nav.Link>
+                </Nav.Link> */}
               </>
             )}
           </Nav>

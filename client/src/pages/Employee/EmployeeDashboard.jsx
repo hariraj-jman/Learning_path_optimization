@@ -1,11 +1,11 @@
 // src/pages/EmployeeDashboard.jsx
 
-import React from 'react';
-import { Container, Row, Col } from 'react-bootstrap';
-import AssignedCourses from '../../components/Employee/AssignedCourses';
-import ProgressTracker from '../../components/Employee/ProgressTracker';
-import SkillsProfile from '../../components/Employee/SkillsProfile';
-import SuggestedLearning from '../../components/Employee/SuggestedLearning';
+import React from "react";
+import { Container, Row, Col } from "react-bootstrap";
+import AssignedCourses from "../../components/Employee/AssignedCourses";
+import ProgressTracker from "../../components/Employee/ProgressTracker";
+import SkillsProfile from "../../components/Employee/SkillsProfile";
+import SuggestedLearning from "../../components/Employee/SuggestedLearning";
 
 const EmployeeDashboardPage = () => {
   return (

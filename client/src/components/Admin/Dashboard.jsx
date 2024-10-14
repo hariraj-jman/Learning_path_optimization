@@ -197,13 +197,28 @@ const Dashboard = () => {
           </Card>
         </Col>
       </Row>
-      <Row className="mt-4">
+      <Row className="mt-4 justify-content-center">
         <Col md={6}>
           <Card className="mb-3">
             <Card.Body>
               <Card.Title>Top 5 Employees</Card.Title>
               <ListGroup>
                 {stats.topEmployees.map((employee, index) => (
+                  <ListGroup.Item key={index}>
+                    {employee.name} - {employee.completedCourses} completed
+                    courses
+                  </ListGroup.Item>
+                ))}
+              </ListGroup>
+            </Card.Body>
+          </Card>
+        </Col>
+        <Col md={6}>
+          <Card className="mb-3">
+            <Card.Body>
+              <Card.Title>Bottom 5 Performers</Card.Title>
+              <ListGroup>
+                {stats.bottomEmployees.map((employee, index) => (
                   <ListGroup.Item key={index}>
                     {employee.name} - {employee.completedCourses} completed
                     courses
@@ -223,64 +238,6 @@ const Dashboard = () => {
                 type="donut"
                 height={300}
               />
-            </Card.Body>
-          </Card>
-        </Col>
-      </Row>
-      <Row className="mt-4">
-        <Col md={6}>
-          <Card className="mb-3">
-            <Card.Body>
-              <Card.Title>Bottom 5 Performers</Card.Title>
-              <ListGroup>
-                {stats.bottomEmployees.map((employee, index) => (
-                  <ListGroup.Item key={index}>
-                    {employee.name} - {employee.completedCourses} completed
-                    courses
-                  </ListGroup.Item>
-                ))}
-              </ListGroup>
-            </Card.Body>
-          </Card>
-        </Col>
-        {/* <Col md={6}>
-          <Card className="mb-3">
-            <Card.Body>
-              <Card.Title>Top Completed Courses</Card.Title>
-              <ListGroup>
-                {stats.topCourses.map((course, index) => (
-                  <ListGroup.Item key={index}>
-                    {course.name} - {course.completions} completions
-                  </ListGroup.Item>
-                ))}
-              </ListGroup>
-            </Card.Body>
-          </Card>
-        </Col> */}
-      </Row>
-      <Row className="mt-4">
-        <Col md={12}>
-          <Card className="mb-3">
-            <Card.Body>
-              <Card.Title>Courses Assigned to Learning Paths</Card.Title>
-              <ResponsiveContainer width="100%" height={300}>
-                <BarChart
-                  data={stats.learningPathCourseCounts}
-                  margin={{
-                    top: 5,
-                    right: 30,
-                    left: 20,
-                    bottom: 5,
-                  }}
-                >
-                  <CartesianGrid strokeDasharray="3 3" />
-                  <XAxis dataKey="name" />
-                  <YAxis />
-                  <Tooltip />
-                  <Legend />
-                  <Bar dataKey="courseCount" fill="#82ca9d" />
-                </BarChart>
-              </ResponsiveContainer>
             </Card.Body>
           </Card>
         </Col>

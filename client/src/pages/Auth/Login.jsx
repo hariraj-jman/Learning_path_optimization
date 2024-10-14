@@ -1,15 +1,15 @@
 // src/pages/Login.jsx
 
-import React, { useState, useContext } from 'react';
-import { Form, Button, Alert, Container, Row, Col } from 'react-bootstrap';
-import { AuthContext } from '../../context/AuthContext';
-import { useNavigate } from 'react-router-dom';
+import React, { useState, useContext } from "react";
+import { Form, Button, Alert, Container, Row, Col } from "react-bootstrap";
+import { AuthContext } from "../../context/AuthContext";
+import { useNavigate } from "react-router-dom";
 
 const Login = () => {
   const { login } = useContext(AuthContext);
   const navigate = useNavigate();
-  const [form, setForm] = useState({ email: '', password: '' });
-  const [error, setError] = useState('');
+  const [form, setForm] = useState({ email: "", password: "" });
+  const [error, setError] = useState("");
 
   const handleChange = (e) => {
     setForm({ ...form, [e.target.name]: e.target.value });
@@ -19,9 +19,9 @@ const Login = () => {
     e.preventDefault();
     try {
       await login(form.email, form.password);
-      navigate('/');
+      navigate(`/${localStorage.getItem("role").toLowerCase()}/dashboard`);
     } catch (err) {
-      setError(err.response?.data?.error || 'Login failed.');
+      setError(err.response?.data?.error || "Login failed.");
     }
   };
 
